@@ -187,6 +187,9 @@
 
     /* ── Tablet portrait 600–767px ── */
     @media (max-width: 767px) {
+      /* Fix: switch hero from center to flex-start so fixed navbar never overlaps content */
+      #hero { align-items: flex-start !important; }
+
       /* Touch targets */
       .btn-primary, .btn-ghost { min-height: 44px; }
       #menu-btn { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
@@ -312,7 +315,7 @@
   </nav>
 
   <!-- ═══════════════ HERO ═══════════════ -->
-  <section style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;">
+  <section id="hero" style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;">
     <video class="hero-video" autoplay muted loop playsinline preload="auto">
       <source src="brand_assets/trull contracting video demo.mp4" type="video/mp4" />
     </video>
