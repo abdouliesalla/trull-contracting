@@ -165,6 +165,115 @@
 
     /* Divider line */
     .h-divider { height: 1px; background: linear-gradient(to right, transparent, #1C1C1C 30%, #1C1C1C 70%, transparent); }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE OVERRIDES
+       All !important beats inline styles — this is intentional.
+    ═══════════════════════════════════════════════════════ */
+
+    /* Fluid images/video base */
+    img, video { max-width: 100%; }
+
+    /* Fix stats to 4-col on tablet+ (inline style was 2-col everywhere) */
+    @media (min-width: 768px) {
+      #stats-grid { grid-template-columns: repeat(4, 1fr) !important; }
+    }
+
+    /* ── Desktop 1024–1279px ── */
+    @media (max-width: 1279px) {
+      #about-grid  { gap: 56px !important; }
+      #contact-grid { gap: 56px !important; }
+    }
+
+    /* ── Tablet portrait 600–767px ── */
+    @media (max-width: 767px) {
+      /* Touch targets */
+      .btn-primary, .btn-ghost { min-height: 44px; }
+      #menu-btn { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
+
+      /* Section padding */
+      #services { padding-top: 72px !important; padding-bottom: 72px !important; }
+      #work     { padding-top: 72px !important; padding-bottom: 72px !important; }
+      #about    { padding-top: 72px !important; padding-bottom: 72px !important; }
+      #contact  { padding-top: 72px !important; padding-bottom: 72px !important; }
+
+      /* Stats: 2-col, fix even-column border */
+      #stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      #stats-grid > div:nth-child(even) { border-right: none !important; }
+
+      /* Work mosaic: collapse to 2 cols */
+      #work-mosaic { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+      #work-mosaic .work-card:nth-child(1) { grid-column: span 2 !important; aspect-ratio: 16/9 !important; }
+      #work-mosaic .work-card:nth-child(2) { grid-column: span 1 !important; grid-row: span 1 !important; aspect-ratio: 4/3 !important; }
+      #work-mosaic .work-card:nth-child(3) { grid-column: span 1 !important; aspect-ratio: 4/3 !important; }
+      #work-mosaic .work-card:nth-child(4) { grid-column: span 2 !important; aspect-ratio: 16/7 !important; }
+
+      /* About: single column */
+      #about-grid { grid-template-columns: 1fr !important; gap: 60px !important; }
+      #about-badge { bottom: -20px !important; right: 12px !important; }
+
+      /* Contact: single column */
+      #contact-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+    }
+
+    /* ── Mobile 375–599px ── */
+    @media (max-width: 599px) {
+      /* Hero: tighter padding, stacked buttons */
+      #hero-content {
+        padding-top: 96px !important;
+        padding-bottom: 64px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+      #hero-buttons { flex-direction: column !important; gap: 10px !important; }
+      #hero-buttons .btn-primary,
+      #hero-buttons .btn-ghost { width: 100% !important; justify-content: center !important; padding: 14px 24px !important; }
+
+      /* Section padding */
+      #services { padding: 56px 16px !important; }
+      #work     { padding: 56px 16px !important; }
+      #about    { padding: 56px 16px !important; }
+      #contact  { padding: 56px 16px !important; }
+
+      /* Work mosaic: single column */
+      #work-mosaic { grid-template-columns: 1fr !important; gap: 10px !important; }
+      #work-mosaic .work-card:nth-child(1),
+      #work-mosaic .work-card:nth-child(2),
+      #work-mosaic .work-card:nth-child(3),
+      #work-mosaic .work-card:nth-child(4) {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+        aspect-ratio: 16/9 !important;
+      }
+
+      /* About badge: pull into normal flow */
+      #about-badge {
+        position: static !important;
+        display: inline-flex !important;
+        margin-top: 20px !important;
+        flex-direction: column !important;
+      }
+
+      /* Form: stack name + phone fields */
+      #form-name-phone { grid-template-columns: 1fr !important; }
+
+      /* CTA section: stack buttons */
+      #cta-buttons { flex-direction: column !important; align-items: stretch !important; gap: 10px !important; }
+      #cta-buttons .btn-primary,
+      #cta-buttons .btn-ghost { justify-content: center !important; }
+    }
+
+    /* ── Small mobile below 375px ── */
+    @media (max-width: 374px) {
+      #navbar { padding-left: 14px !important; padding-right: 14px !important; }
+      #hero-content { padding-top: 84px !important; padding-left: 14px !important; padding-right: 14px !important; }
+      #services { padding: 48px 14px !important; }
+      #work     { padding: 48px 14px !important; }
+      #about    { padding: 48px 14px !important; }
+      #contact  { padding: 48px 14px !important; }
+      .svc-card { padding: 22px !important; }
+      #contact-form { padding: 24px 16px !important; }
+    }
   </style>
 </head>
 <body style="background:#0D0D0D; color:#F0EDE8;" class="font-sans antialiased">
@@ -212,7 +321,7 @@
     <div style="position:absolute;inset:0;background:linear-gradient(to top, #0D0D0D 0%, transparent 35%);"></div>
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse 55% 70% at 25% 55%, rgba(232,101,25,0.055) 0%, transparent 65%);"></div>
 
-    <div style="position:relative;z-index:10;max-width:1280px;margin:0 auto;padding:0 24px;width:100%;padding-top:120px;padding-bottom:100px;">
+    <div id="hero-content" style="position:relative;z-index:10;max-width:1280px;margin:0 auto;padding:0 24px;width:100%;padding-top:120px;padding-bottom:100px;">
       <div style="max-width:620px;">
         <div class="section-tag fade-up" style="margin-bottom:22px;">Licensed &amp; Insured · 24/7 Operations</div>
         <h1 class="font-display fade-up" style="font-size:clamp(46px,7vw,84px);font-weight:700;line-height:1.04;letter-spacing:-0.03em;margin-bottom:24px;transition-delay:0.1s;">
@@ -221,7 +330,7 @@
         <p class="fade-up" style="color:#8A8A8A;font-size:18px;line-height:1.75;margin-bottom:40px;max-width:500px;transition-delay:0.2s;">
           Trull Contracting delivers heavy civil and infrastructure work with precision — excavation, paving, utilities, and around-the-clock commitment to every project.
         </p>
-        <div class="fade-up" style="display:flex;flex-wrap:wrap;gap:14px;transition-delay:0.3s;">
+        <div id="hero-buttons" class="fade-up" style="display:flex;flex-wrap:wrap;gap:14px;transition-delay:0.3s;">
           <a href="#contact" class="btn-primary" style="padding:15px 36px;font-size:14px;">Request a Quote</a>
           <a href="#work" class="btn-ghost" style="padding:15px 36px;font-size:14px;">View Our Work</a>
         </div>
@@ -237,7 +346,7 @@
 
   <!-- ═══════════════ STATS BAR ═══════════════ -->
   <section style="border-top:1px solid #141414;border-bottom:1px solid #141414;background:#080808;">
-    <div style="max-width:1280px;margin:0 auto;padding:36px 24px;display:grid;grid-template-columns:repeat(2,1fr);gap:32px;" class="md:grid-cols-4">
+    <div id="stats-grid" style="max-width:1280px;margin:0 auto;padding:36px 24px;display:grid;grid-template-columns:repeat(2,1fr);gap:32px;">
       <div class="fade-up" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 24px;border-right:1px solid #141414;">
         <span class="font-display" style="font-size:40px;font-weight:700;color:#E86519;font-variant-numeric:tabular-nums;">15+</span>
         <span style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#555;">Years Experience</span>
@@ -359,7 +468,7 @@
       </div>
 
       <!-- Mosaic grid -->
-      <div style="display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto;gap:14px;">
+      <div id="work-mosaic" style="display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto;gap:14px;">
 
         <!-- Large landscape: road paving at dusk -->
         <div class="work-card fade-up" style="grid-column:span 8;aspect-ratio:16/9;">
@@ -418,7 +527,7 @@
 
   <!-- ═══════════════ ABOUT ═══════════════ -->
   <section id="about" style="padding:112px 24px;">
-    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="lg:grid-cols-2">
+    <div id="about-grid" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
 
       <!-- Image side -->
       <div class="fade-up" style="position:relative;">
@@ -428,7 +537,7 @@
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.45) 0%,transparent 55%);"></div>
         </div>
         <!-- Badge -->
-        <div style="position:absolute;bottom:-28px;right:-16px;background:#E86519;border-radius:10px;padding:20px 28px;box-shadow:0 20px 50px rgba(232,101,25,0.35);">
+        <div id="about-badge" style="position:absolute;bottom:-28px;right:-16px;background:#E86519;border-radius:10px;padding:20px 28px;box-shadow:0 20px 50px rgba(232,101,25,0.35);">
           <div class="font-display" style="font-size:36px;font-weight:700;color:#fff;line-height:1;">15+</div>
           <div style="color:rgba(255,255,255,0.75);font-size:10.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-top:3px;">Years Strong</div>
         </div>
@@ -501,7 +610,7 @@
       <p style="color:#5A5A5A;font-size:17px;line-height:1.75;margin-bottom:40px;">
         Contact us today for a free consultation and quote. We respond within 24 hours.
       </p>
-      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
+      <div id="cta-buttons" style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
         <a href="tel:+15550000000" class="btn-primary" style="padding:15px 44px;font-size:14px;">Call Us Now</a>
         <a href="#contact" class="btn-ghost" style="padding:15px 44px;font-size:14px;">Send a Message</a>
       </div>
@@ -510,7 +619,7 @@
 
   <!-- ═══════════════ CONTACT ═══════════════ -->
   <section id="contact" style="padding:112px 24px;background:#0D0D0D;">
-    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="lg:grid-cols-2">
+    <div id="contact-grid" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
 
       <!-- Left info -->
       <div class="fade-up">
@@ -564,7 +673,7 @@
       <!-- Right form -->
       <div class="fade-up" style="transition-delay:0.15s;">
         <form id="contact-form" style="background:#0A0A0A;border:1px solid #1C1C1C;border-radius:12px;padding:36px;display:flex;flex-direction:column;gap:20px;">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div id="form-name-phone" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
             <div style="display:flex;flex-direction:column;gap:7px;">
               <label style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#555;" for="cf-name">Full Name</label>
               <input id="cf-name" class="form-input" type="text" placeholder="John Smith" required />
